@@ -1,5 +1,11 @@
 import * as React from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    View,
+    StatusBar,
+    TouchableOpacity,
+} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -7,7 +13,10 @@ import TopBar from '../components/TopBar'
 import AnimateNumber from 'react-native-animate-number'
 import HomeListCard from '../components/Cards/HomeListCard'
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
+    const pressHandler = (title) => {
+        navigation.navigate('OverviewDetailScreen', { title })
+    }
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
@@ -33,11 +42,31 @@ export default function HomeScreen() {
                             timing="easeOut"
                         />
                     </LinearGradient>
-                    <HomeListCard projectCounter={25} label={5} />
-                    <HomeListCard projectCounter={12} label={4} />
-                    <HomeListCard projectCounter={32} label={3} />
-                    <HomeListCard projectCounter={80} label={2} />
-                    <HomeListCard projectCounter={121} label={1} />
+                    <TouchableOpacity
+                        onPress={() => pressHandler('5 Projects Completed by')}
+                    >
+                        <HomeListCard projectCounter={25} label={5} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => pressHandler('4 Projects Completed by')}
+                    >
+                        <HomeListCard projectCounter={12} label={4} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => pressHandler('3 Projects Completed by')}
+                    >
+                        <HomeListCard projectCounter={32} label={3} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => pressHandler('2 Projects Completed by')}
+                    >
+                        <HomeListCard projectCounter={80} label={2} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => pressHandler('1 Projects Completed by')}
+                    >
+                        <HomeListCard projectCounter={121} label={1} />
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </View>

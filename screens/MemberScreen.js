@@ -5,7 +5,7 @@ import Colors from '../constants/Colors'
 import MemberCard from '../components/Cards/MemberCard'
 import TopBar from '../components/TopBar'
 
-export default function MemberScreen() {
+export default function MemberScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
@@ -14,7 +14,7 @@ export default function MemberScreen() {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                <MemberCard />
+                <MemberCard navigation={navigation} showCount={true} />
             </ScrollView>
         </View>
     )

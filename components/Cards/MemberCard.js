@@ -1,46 +1,80 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import Colors from '../../constants/Colors'
 import { Avatar } from 'react-native-paper'
 import AnimateNumber from 'react-native-animate-number'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 
-const HomeListCard = ({ label, projectCounter }) => {
+const MemberCard = ({ projectCounter, showCount, navigation }) => {
+    console.log(navigation)
+    const handlePress = (title) => {
+        navigation.navigate('UserScreen', { title })
+    }
     return (
-        <View style={styles.mainView}>
-            <View style={styles.leftView}>
-                <Avatar.Image
-                    size={48}
-                    source={require('../../assets/images/logo.jpeg')}
-                />
-                <View style={{ marginLeft: 12 }}>
-                    <Text style={styles.fullName}>Viral Sangani</Text>
-                    <View style={styles.githubText}>
-                        <MaterialCommunityIcons
-                            name="github-circle"
-                            size={20}
-                            color="white"
-                        />
-                        <Text style={styles.githubUsername}>viral-sangani</Text>
+        <TouchableOpacity onPress={() => handlePress('viral-sangani')}>
+            <View style={styles.mainView}>
+                <View style={styles.leftView}>
+                    <Avatar.Image
+                        size={48}
+                        source={require('../../assets/images/logo.jpeg')}
+                    />
+                    <View style={{ marginLeft: 12 }}>
+                        <Text style={styles.fullName}>Viral Sangani</Text>
+                        <View style={styles.githubText}>
+                            <MaterialCommunityIcons
+                                name="github-circle"
+                                size={20}
+                                color="white"
+                            />
+                            <Text style={styles.githubUsername}>
+                                viral-sangani
+                            </Text>
+                        </View>
                     </View>
                 </View>
-            </View>
-            <View style={styles.rightView}>
-                <AnimateNumber
-                    style={styles.counter}
-                    value={projectCounter}
-                    formatter={(val) => {
-                        return parseInt(val)
+                <View
+                    style={{
+                        marginRight: showCount ? 24 : 6,
+                        alignItems: 'center',
                     }}
-                    timing="easeOut"
-                />
-                <Text style={styles.projects}>Projects</Text>
+                >
+                    {showCount ? (
+                        <>
+                            <AnimateNumber
+                                style={styles.counter}
+                                value={projectCounter}
+                                formatter={(val) => {
+                                    return parseInt(val)
+                                }}
+                                timing="easeOut"
+                            />
+                            <Text style={styles.projects}>Projects</Text>
+                        </>
+                    ) : (
+                        <Avatar.Icon
+                            size={48}
+                            style={{
+                                marginRight: 8,
+                                backgroundColor: Colors.primaryBg,
+                            }}
+                            color={Colors.primaryBg}
+                            icon={() => (
+                                <AntDesign
+                                    name="rightcircleo"
+                                    size={24}
+                                    color="#fcfcfc"
+                                />
+                            )}
+                        />
+                    )}
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
-export default HomeListCard
+export default MemberCard
 
 const styles = StyleSheet.create({
     mainView: {
@@ -58,10 +92,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginLeft: 16,
     },
-    rightView: {
-        marginRight: 24,
-        alignItems: 'center',
-    },
     leftText: {
         marginLeft: 24,
     },
@@ -77,7 +107,7 @@ const styles = StyleSheet.create({
     },
     githubUsername: {
         marginLeft: 6,
-        color: '#fcfcfc',
+        color: '#FF0A78',
         fontSize: 14,
         fontFamily: 'AirbnbCerealMedium',
     },

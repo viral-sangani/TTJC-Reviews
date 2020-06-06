@@ -1,20 +1,26 @@
 import * as React from 'react'
-import { StyleSheet, View, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
+import BlogDetailCard from '../components/Cards/BlogDetailCard'
+import MemberCard from '../components/Cards/MemberCard'
 import TopBar from '../components/TopBar'
-import ProjectCard from '../components/Cards/ProjectCard'
 
-export default function ProjectScreen({ navigation }) {
+export default function BlogDetailScreen({ navigation, route }) {
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
-            <TopBar />
+            <TopBar
+                title={route.params.title}
+                navigation={navigation}
+                secondary={true}
+            />
             <ScrollView
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                <ProjectCard navigation={navigation} />
+                {/* <MemberCard showCount={true} /> */}
+                <BlogDetailCard />
             </ScrollView>
         </View>
     )
