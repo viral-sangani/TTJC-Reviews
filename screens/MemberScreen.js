@@ -37,6 +37,7 @@ export default function MemberScreen({ navigation }) {
                         .reverse()
                         .map((user) => (
                             <MemberCard
+                                key={user.id}
                                 id={user.id}
                                 user={user}
                                 navigation={navigation}

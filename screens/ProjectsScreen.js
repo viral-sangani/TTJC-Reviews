@@ -38,6 +38,7 @@ export default function ProjectScreen({ navigation }) {
                         .map((project) => {
                             return (
                                 <ProjectCard
+                                    key={project.id}
                                     id={project.id}
                                     project={project}
                                     navigation={navigation}

@@ -256,10 +256,12 @@ function getUsers(projects) {
             users[index].totalProjects = users[index].totalProjects + 1
             users[index].projects.push(project.id)
         } else {
+            var projectsArray = []
+            projectsArray.push(project.id)
             users.push({
                 ...project.author,
                 totalProjects: 1,
-                projects: [projects.id],
+                projects: projectsArray,
             })
             return true
         }

@@ -27,6 +27,9 @@ const ProjectDetailCard = ({ project }) => {
                         </Markdown>
                     </View>
                     <Text style={styles.projectHeadingLabe}>Date: </Text>
+                    <Text style={styles.projectContent}>
+                        {project.createdAt.substring(0, 10)}
+                    </Text>
                 </View>
             </View>
         </View>

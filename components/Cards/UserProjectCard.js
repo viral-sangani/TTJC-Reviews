@@ -9,21 +9,28 @@ Hello Mentors,\r\n\r\nI have designed and developed a web application using:\r\n
 `
 
 const UserProjectCard = ({ projectId }) => {
-    const projectData = React.useContext(DataContext)
+    const { projectData } = React.useContext(DataContext)
     var project = projectData.filter((projectObj) => {
-        return projectObj.id == projectId
+        return projectObj.id === projectId
     })
     return (
         <View style={styles.mainView}>
-            <Text style={styles.projectNumber}>Project 1</Text>
             <View style={styles.content}>
                 <View style={{}}>
                     <Text style={styles.projectHeadingLabe}>Title:</Text>
-                    <Text style={styles.projectContent}>{project.title}</Text>
+                    <Text style={styles.projectContent}>
+                        {project[0].title}
+                    </Text>
                     <Text style={styles.projectHeadingLabe}>Description:</Text>
                     <View style={{ marginHorizontal: 16 }}>
-                        <Markdown style={MarkdownStyles}>{data}</Markdown>
+                        <Markdown style={MarkdownStyles}>
+                            {project[0].body}
+                        </Markdown>
                     </View>
+                    <Text style={styles.projectHeadingLabe}>Date: </Text>
+                    <Text style={styles.projectContent}>
+                        {project[0].createdAt.substring(0, 10)}
+                    </Text>
                 </View>
             </View>
         </View>
