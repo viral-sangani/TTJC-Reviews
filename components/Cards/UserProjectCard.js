@@ -2,25 +2,24 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import Colors from '../../constants/Colors'
 import Markdown from 'react-native-markdown-display'
+import { DataContext } from '../../API/Main'
 
 const data = `
 Hello Mentors,\r\n\r\nI have designed and developed a web application using:\r\n- [GatsbyJS](https://www.gatsbyjs.org/)\r\n- HTML5/CSS3\r\n- Hosted on serverless AWS S3/AWS CloudFront (CDN) and used AWS Lambda Functions.\r\n\r\nThe blog is responsive with Like function similar to [Medium.com](https://medium.com/) and subscribes option created using AWS Lambda function. \r\n\r\nThe project is live @ [https://blog.viralsangani.me/](https://blog.viralsangani.me/)\r\nThe [Github Link](https://github.com/viral-sangani/gatsby-blog)\r\n\r\n### Demo\r\n\r\n![Demo](https://raw.githubusercontent.com/viral-sangani/gatsby-blog/master/static/gatsby-blog-gif.gif)\r\n
 `
 
-const UserProjectCard = ({ projectCounter, showCount, navigation }) => {
-    const handlePress = (title) => {
-        navigation.navigate('UserScreen', { title })
-    }
+const UserProjectCard = ({ projectId }) => {
+    const projectData = React.useContext(DataContext)
+    var project = projectData.filter((projectObj) => {
+        return projectObj.id == projectId
+    })
     return (
         <View style={styles.mainView}>
             <Text style={styles.projectNumber}>Project 1</Text>
             <View style={styles.content}>
                 <View style={{}}>
                     <Text style={styles.projectHeadingLabe}>Title:</Text>
-                    <Text style={styles.projectContent}>
-                        Blazing fast blog built with Gatsby and hosted
-                        serverlessly using AWS Lambda and S3
-                    </Text>
+                    <Text style={styles.projectContent}>{project.title}</Text>
                     <Text style={styles.projectHeadingLabe}>Description:</Text>
                     <View style={{ marginHorizontal: 16 }}>
                         <Markdown style={MarkdownStyles}>{data}</Markdown>

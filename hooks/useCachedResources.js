@@ -22,12 +22,7 @@ export default function useCachedResources() {
                     AirbnbCerealMedium: require('../assets/fonts/AirbnbCerealMedium.ttf'),
                     AirbnbCerealBook: require('../assets/fonts/AirbnbCerealBook.ttf'),
                 })
-                console.log(await AsyncStorage.getAllKeys())
-                project = await AsyncStorage.getItem('projectData')
-                if (!project) {
-                    console.log('generateDS called')
-                    await generateDataStructure()
-                }
+                await generateDataStructure()
             } catch (e) {
                 // We might want to provide this error information to an error reporting service
                 console.warn(e)

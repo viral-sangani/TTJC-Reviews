@@ -8,6 +8,7 @@ import TopBar from '../components/TopBar'
 
 export default function UserScreen({ navigation, route }) {
     const { user } = route.params
+    console.log(user)
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
@@ -21,8 +22,10 @@ export default function UserScreen({ navigation, route }) {
                 contentContainerStyle={styles.contentContainer}
             >
                 <MemberCard user={user} showCount={true} />
-                <UserProjectCard />
-                <UserProjectCard />
+                {/* {user.projects.map((project) => (
+                    <UserProjectCard projectId={project.id} key={project.id} />
+                ))} */}
+                {/* <UserProjectCard /> */}
             </ScrollView>
         </View>
     )

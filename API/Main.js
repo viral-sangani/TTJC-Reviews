@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React from 'react'
-import AsyncStorage from '@react-native-community/async-storage'
 var iterateArray = []
 var totalCount = 0
 var uri = `https://api.github.com/graphql`
@@ -14,19 +13,23 @@ var Overviews = {
     twoProjects: 0,
     oneProjects: 0,
 }
-var lables = []
+var labels = []
 const regexProject = /\[[pP]roject[- 0-9a-zA-Z]*[\[0-9a-zA-Z \]]*(\])(?!.*\])[ -]*/
 
 export const DataContext = React.createContext()
 
-export const DataProvider = async ({ children }) => {
-    // projectsTemp = await AsyncStorage.getItem('projectData')
-    // usersTemp = await AsyncStorage.getItem('userData')
-    // labelsTemp = await AsyncStorage.getItem('lableData')
-
+export const DataProvider = ({ children }) => {
     const [projectData, setProjectData] = React.useState(projects)
     const [userData, setUserData] = React.useState(users)
-    const [lableData, setLableData] = React.useState(lables)
+    const [lableData, setLableData] = React.useState(labels)
+
+    const reloadData = async () => {
+        let data = await generateDataStructure()
+        setProjectData(data.projects)
+        setUserData(data.users)
+        setLableData(data.labels)
+    }
+
     return (
         <DataContext.Provider
             value={{
@@ -36,6 +39,7 @@ export const DataProvider = async ({ children }) => {
                 setUserData,
                 lableData,
                 setLableData,
+                reloadData,
             }}
         >
             {children}
@@ -43,16 +47,14 @@ export const DataProvider = async ({ children }) => {
     )
 }
 
-const makePersistant = async (key, value) => {
-    try {
-        await AsyncStorage.setItem(key, JSON.stringify(value))
-    } catch {
-        console.log(err)
-    }
-}
-
 export const generateDataStructure = async () => {
-    console.log(1)
+    iterateArray = []
+    totalCount = 0
+    data = []
+    projects = []
+    users = []
+    labels = []
+    console.log('Starting....')
     let query = `
     query totalIssues{
       repositoryOwner(login: "tanaypratap") {
@@ -80,9 +82,11 @@ export const generateDataStructure = async () => {
     )
     getTotalCount(p1.data)
     await getData()
+    return { projects, labels, users }
 }
 
 async function getData() {
+    console.log('Getting data...')
     var cursor = ''
     let query = `query getdata{
                     repositoryOwner(login: "tanaypratap") {
@@ -136,6 +140,7 @@ async function getData() {
     )
 
     data = [...res.data.data.repositoryOwner.repository.issues.edges]
+    console.log('0 Call')
     cursor = getCursor(res.data.data.repositoryOwner.repository.issues.edges)
 
     for (let i = 1; i < iterateArray.length; i++) {
@@ -194,17 +199,17 @@ async function getData() {
             ...data,
             ...res.data.data.repositoryOwner.repository.issues.edges,
         ]
+        console.log(i + ' call')
         cursor = getCursor(
             res.data.data.repositoryOwner.repository.issues.edges
         )
     }
     getProjects(data)
+    console.log('generating Projet data')
     getUsers(projects)
+    console.log('generating User data')
     getLables(projects)
-    makePersistant(projectData, projects)
-    makePersistant(userData, users)
-    // getOverview(users)
-    // console.log(project)
+    console.log('generating Label data')
 }
 
 function getTotalCount(data) {
@@ -249,7 +254,7 @@ function getUsers(projects) {
                 (item) => item.login === project.author.login
             )
             users[index].totalProjects = users[index].totalProjects + 1
-            users[index].projects.push(project)
+            users[index].projects.push(project.id)
         } else {
             users.push({
                 ...project.author,
@@ -263,26 +268,12 @@ function getUsers(projects) {
 
 function getLables(projects) {
     projects.map((project) => {
-        project.lables.edges.forEach((element) => {
-            if (element.node.name === 'Reviewed-By-Mentor') {
-                lables.push(project)
-            }
-        })
+        if (project.labels.edges.length > 0) {
+            project.labels.edges.map((label) => {
+                if (label.node.name == 'Reviewed-By-Mentor') {
+                    labels.push(project)
+                }
+            })
+        }
     })
 }
-
-// function getOverview(users) {
-//     users.map((user) => {
-//         if (user.totalProjects == 1) {
-//             Overviews.oneProjects = Overviews.oneProjects + 1
-//         } else if (user.totalProjects == 2) {
-//             Overviews.twoProjects = Overviews.twoProjects + 1
-//         } else if (user.totalProjects == 3) {
-//             Overviews.threeProjects = Overviews.threeProjects + 1
-//         } else if (user.totalProjects == 4) {
-//             Overviews.fourProjects = Overviews.fourProjects + 1
-//         } else if (user.totalProjects == 5) {
-//             Overviews.fiveProjects = Overviews.fiveProjects + 1
-//         }
-//     })
-// }

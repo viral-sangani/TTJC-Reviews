@@ -34,6 +34,8 @@
     "react-native-dropdownalert": "^4.2.1",
     "react-native-flash-message": "^0.1.15",
     "react-native-gesture-handler": "~1.6.0",
+    "react-native-loader": "^1.2.1",
+    "react-native-loading-spinner-overlay": "^1.1.0",
     "react-native-markdown-display": "^6.1.2",
     "react-native-markdown-renderer": "^3.2.8",
     "react-native-paper": "^3.10.1",

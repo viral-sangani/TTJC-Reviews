@@ -1,12 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Avatar } from 'react-native-paper'
-import {} from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import Colors from '../constants/Colors'
 
-const TopBar = ({ title, secondary, navigation }) => {
+const TopBar = ({ title, secondary, navigation, handleReloadData }) => {
     const backButton = () => {
         navigation.pop()
     }
@@ -60,12 +59,14 @@ const TopBar = ({ title, secondary, navigation }) => {
                         </>
                     )}
                 </View>
-                <MaterialCommunityIcons
-                    style={styles.rightContent}
-                    name="reload"
-                    size={28}
-                    color="black"
-                />
+                <TouchableOpacity onPress={handleReloadData}>
+                    <MaterialCommunityIcons
+                        style={styles.rightContent}
+                        name="reload"
+                        size={28}
+                        color="black"
+                    />
+                </TouchableOpacity>
             </View>
         </React.Fragment>
     )

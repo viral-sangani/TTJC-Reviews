@@ -1,29 +1,36 @@
 import * as React from 'react'
-import {
-    StyleSheet,
-    Text,
-    View,
-    StatusBar,
-    TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import { LinearGradient } from 'expo-linear-gradient'
 import TopBar from '../components/TopBar'
 import AnimateNumber from 'react-native-animate-number'
-import { Avatar } from 'react-native-paper'
-import { DataContext } from '../API/Main'
+import { DataContext, generateDataStructure } from '../API/Main'
+import Loader from '../components/Loader'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 export default function HomeScreen({ navigation }) {
-    const { projectData, lableData } = React.useContext(DataContext)
-
-    const pressHandler = (title) => {
-        navigation.navigate('OverviewDetailScreen', { title })
+    const { projectData, userData, lableData, reloadData } = React.useContext(
+        DataContext
+    )
+    const [loading, setLoading] = React.useState(false)
+    const handleReload = async () => {
+        setLoading(true)
+        await reloadData()
+        setLoading(false)
     }
+
     return (
         <View style={styles.container}>
+            <Spinner
+                visible={loading}
+                size="large"
+                textContent={'Loading Please wait...'}
+                textStyle={{ color: '#FFF' }}
+                children={<Loader />}
+            />
             <StatusBar barStyle="light-content" />
-            <TopBar />
+            <TopBar handleReloadData={handleReload} />
 
             <ScrollView
                 style={styles.container}
@@ -73,7 +80,7 @@ export default function HomeScreen({ navigation }) {
                         <View style={styles.rightView}>
                             <AnimateNumber
                                 style={styles.counter}
-                                value={100}
+                                value={userData.length}
                                 formatter={(val) => {
                                     return parseInt(val)
                                 }}
@@ -88,9 +95,9 @@ export default function HomeScreen({ navigation }) {
                                 <Text style={styles.mainHeading}>
                                     Projects Reviwed
                                 </Text>
-                                {/* <Text style={styles.subHeading}>
-                                    in the review by
-                                </Text> */}
+                                <Text style={styles.subHeading}>
+                                    with label - "Reviewed-By-Mentor"
+                                </Text>
                             </View>
                         </View>
                         <View style={styles.rightView}>
@@ -102,7 +109,6 @@ export default function HomeScreen({ navigation }) {
                                 }}
                                 timing="easeOut"
                             />
-                            {/* <Text style={styles.people}>People</Text> */}
                         </View>
                     </View>
                     <View style={styles.mainView}>
@@ -111,63 +117,19 @@ export default function HomeScreen({ navigation }) {
                                 <Text style={styles.mainHeading}>
                                     Review Pending
                                 </Text>
-                                {/* <Text style={styles.subHeading}>
-                                    in the review by
-                                </Text> */}
                             </View>
                         </View>
                         <View style={styles.rightView}>
                             <AnimateNumber
                                 style={styles.counter}
-                                value={100}
+                                value={projectData.length - lableData.length}
                                 formatter={(val) => {
                                     return parseInt(val)
                                 }}
                                 timing="easeOut"
                             />
-                            {/* <Text style={styles.people}>People</Text> */}
                         </View>
                     </View>
-                    {/* <TouchableOpacity
-                        onPress={() => pressHandler('1 Projects Completed by')}
-                    >
-                        <HomeListCard
-                            projectCounter={OverviewData.oneProjects}
-                            label={1}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => pressHandler('2 Projects Completed by')}
-                    >
-                        <HomeListCard
-                            projectCounter={OverviewData.twoProjects}
-                            label={2}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => pressHandler('3 Projects Completed by')}
-                    >
-                        <HomeListCard
-                            projectCounter={OverviewData.threeProjects}
-                            label={3}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => pressHandler('4 Projects Completed by')}
-                    >
-                        <HomeListCard
-                            projectCounter={OverviewData.fourProjects}
-                            label={4}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => pressHandler('5 Projects Completed by')}
-                    >
-                        <HomeListCard
-                            projectCounter={OverviewData.fiveProjects}
-                            label={5}
-                        />
-                    </TouchableOpacity> */}
                 </View>
             </ScrollView>
         </View>
@@ -201,7 +163,7 @@ const styles = StyleSheet.create({
     subHeading: {
         fontFamily: 'AirbnbCerealBold',
         color: '#fcfcfc',
-        fontSize: 14,
+        fontSize: 12,
         marginLeft: 30,
     },
     counter: {
