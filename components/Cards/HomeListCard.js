@@ -16,7 +16,7 @@ const HomeListCard = ({ label, projectCounter }) => {
                 />
                 <View style={{ marginLeft: 16 }}>
                     <Text style={styles.projects}>Projects</Text>
-                    <Text style={styles.completedBy}>Completed by</Text>
+                    <Text style={styles.completedBy}>in the review by</Text>
                 </View>
             </View>
             <View style={styles.rightView}>

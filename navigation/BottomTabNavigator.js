@@ -15,7 +15,7 @@ export default function BottomTabNavigator({ navigation, route }) {
     return (
         <BottomTab.Navigator
             initialRouteName={INITIAL_ROUTE_NAME}
-            lazy={true}
+            lazy={false}
             tabBarOptions={{
                 activeBackgroundColor: '#FF0A78',
                 activeTintColor: '#fff',
@@ -47,7 +47,10 @@ export default function BottomTabNavigator({ navigation, route }) {
                 options={{
                     title: 'Projects',
                     tabBarIcon: ({ focused }) => (
-                        <TabBarIcon focused={focused} name="md-checkmark-circle-outline" />
+                        <TabBarIcon
+                            focused={focused}
+                            name="md-checkmark-circle-outline"
+                        />
                     ),
                 }}
             />

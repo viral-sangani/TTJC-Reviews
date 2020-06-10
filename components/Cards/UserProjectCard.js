@@ -8,7 +8,6 @@ Hello Mentors,\r\n\r\nI have designed and developed a web application using:\r\n
 `
 
 const UserProjectCard = ({ projectCounter, showCount, navigation }) => {
-    console.log(navigation)
     const handlePress = (title) => {
         navigation.navigate('UserScreen', { title })
     }

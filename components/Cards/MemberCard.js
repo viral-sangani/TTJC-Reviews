@@ -6,21 +6,30 @@ import AnimateNumber from 'react-native-animate-number'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 
-const MemberCard = ({ projectCounter, showCount, navigation }) => {
-    console.log(navigation)
-    const handlePress = (title) => {
-        navigation.navigate('UserScreen', { title })
+const MemberCard = ({ user, showCount, navigation }) => {
+    const handlePress = () => {
+        navigation.navigate('UserScreen', { user })
     }
     return (
-        <TouchableOpacity onPress={() => handlePress('viral-sangani')}>
+        <TouchableOpacity onPress={handlePress}>
             <View style={styles.mainView}>
                 <View style={styles.leftView}>
                     <Avatar.Image
                         size={48}
-                        source={require('../../assets/images/logo.jpeg')}
+                        source={{
+                            uri: user.avatarUrl,
+                        }}
                     />
-                    <View style={{ marginLeft: 12 }}>
-                        <Text style={styles.fullName}>Viral Sangani</Text>
+                    <View style={{ marginLeft: 12, width: 225 }}>
+                        <Text
+                            style={styles.fullName}
+                            adjustsFontSizeToFit
+                            ellipsizeMode="head"
+                        >
+                            {user.name && user.name.length > 16
+                                ? user.name.substring(0, 16 - 3) + '...'
+                                : user.name}
+                        </Text>
                         <View style={styles.githubText}>
                             <MaterialCommunityIcons
                                 name="github-circle"
@@ -28,7 +37,10 @@ const MemberCard = ({ projectCounter, showCount, navigation }) => {
                                 color="white"
                             />
                             <Text style={styles.githubUsername}>
-                                viral-sangani
+                                @
+                                {user.login.length > 16
+                                    ? user.login.substring(0, 16 - 3) + '...'
+                                    : user.login}
                             </Text>
                         </View>
                     </View>
@@ -43,11 +55,16 @@ const MemberCard = ({ projectCounter, showCount, navigation }) => {
                         <>
                             <AnimateNumber
                                 style={styles.counter}
-                                value={projectCounter}
-                                formatter={(val) => {
-                                    return parseInt(val)
+                                value={user.totalProjects}
+                                countBy={1}
+                                timing={(interval, progress) => {
+                                    // slow start, slow end
+                                    return (
+                                        interval *
+                                        (1 - Math.sin(Math.PI * progress)) *
+                                        10
+                                    )
                                 }}
-                                timing="easeOut"
                             />
                             <Text style={styles.projects}>Projects</Text>
                         </>
@@ -81,6 +98,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.secondaryBg,
         flexDirection: 'row',
         marginTop: 20,
+        // marginBottom: 20,
         marginHorizontal: 20,
         height: 80,
         borderRadius: 30,
@@ -91,13 +109,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginLeft: 16,
+        width: 225,
     },
     leftText: {
         marginLeft: 24,
     },
     fullName: {
         color: '#fcfcfc',
-        fontSize: 24,
+        fontSize: 18,
         fontFamily: 'AirbnbCerealMedium',
     },
     githubText: {

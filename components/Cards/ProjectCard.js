@@ -4,24 +4,23 @@ import Colors from '../../constants/Colors'
 import { Avatar } from 'react-native-paper'
 import { AntDesign } from '@expo/vector-icons'
 
-const mytextvar =
-    'Blazing fast blog built with Gatsby and hosted serverlessly using AWS Lambda and S3'
-const maxlimit = 50
+const maxlimit = 75
 
-const ProjectCard = ({ navigation }) => {
-    const handlePress = (data) => {
-        navigation.navigate('ProjectDetailScreen', { data })
+const ProjectCard = ({ project, navigation }) => {
+    const handlePress = () => {
+        navigation.navigate('ProjectDetailScreen', { project })
     }
 
     return (
-        <TouchableOpacity onPress={() => handlePress('viral')}>
+        <TouchableOpacity onPress={handlePress}>
             <View style={styles.mainView}>
                 <View style={{ width: 260 }}>
                     <View style={styles.leftText}>
                         <Text style={styles.projectName}>
-                            {mytextvar.length > maxlimit
-                                ? mytextvar.substring(0, maxlimit - 3) + '...'
-                                : mytextvar}
+                            {project.title.length > maxlimit
+                                ? project.title.substring(0, maxlimit - 3) +
+                                  '...'
+                                : project.title}
                         </Text>
                         <View style={styles.githubView}>
                             <Avatar.Icon
@@ -37,9 +36,24 @@ const ProjectCard = ({ navigation }) => {
                                 )}
                             />
                             <Text style={styles.githubUsername}>
-                                viral-sangani
+                                {project.author.login &&
+                                project.author.login.length > 16
+                                    ? project.author.login.substring(
+                                          0,
+                                          16 - 3
+                                      ) + '...'
+                                    : project.author.login}
                             </Text>
                         </View>
+                        <Text style={styles.projectDate}>
+                            Name:{' '}
+                            {project.author.name &&
+                            project.author.name.length > 16
+                                ? project.author.name.substring(0, 16 - 3) +
+                                  '...'
+                                : project.author.name}{' '}
+                        </Text>
+                        <Text style={styles.projectDate}>Date: 04/05/2000</Text>
                     </View>
                 </View>
                 <Avatar.Icon
@@ -70,7 +84,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 20,
         marginHorizontal: 20,
-        height: 80,
+        height: 125,
         borderRadius: 30,
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -78,6 +92,12 @@ const styles = StyleSheet.create({
     projectName: {
         fontFamily: 'AirbnbCerealMedium',
         fontSize: 16,
+        color: '#fcfcfc',
+    },
+    projectDate: {
+        marginTop: 5,
+        fontFamily: 'AirbnbCerealMedium',
+        fontSize: 13,
         color: '#fcfcfc',
     },
     leftText: {

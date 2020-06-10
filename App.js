@@ -10,43 +10,47 @@ import OverviewDetailScreen from './screens/_OverviewDetailScreen'
 import ProjectDetailScreen from './screens/_ProjectDetailScreen'
 import BlogDetailScreen from './screens/_BlogDetailScreen'
 import UserScreen from './screens/_UserScreen'
+import { DataProvider } from './API/Main'
 
 const Stack = createStackNavigator()
 
 export default function App(props) {
     const isLoadingComplete = useCachedResources()
-
     if (!isLoadingComplete) {
         return null
     } else {
         return (
-            <View style={styles.container}>
-                {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-                <NavigationContainer linking={LinkingConfiguration}>
-                    <Stack.Navigator screenOptions={{ headerShown: false }}>
-                        <Stack.Screen
-                            name="Root"
-                            component={BottomTabNavigator}
-                        />
-                        <Stack.Screen
-                            name="OverviewDetailScreen"
-                            component={OverviewDetailScreen}
-                        />
-                        <Stack.Screen
-                            name="UserScreen"
-                            component={UserScreen}
-                        />
-                        <Stack.Screen
-                            name="ProjectDetailScreen"
-                            component={ProjectDetailScreen}
-                        />
-                        <Stack.Screen
-                            name="BlogDetailScreen"
-                            component={BlogDetailScreen}
-                        />
-                    </Stack.Navigator>
-                </NavigationContainer>
-            </View>
+            <DataProvider>
+                <View style={styles.container}>
+                    {Platform.OS === 'ios' && (
+                        <StatusBar barStyle="dark-content" />
+                    )}
+                    <NavigationContainer linking={LinkingConfiguration}>
+                        <Stack.Navigator screenOptions={{ headerShown: false }}>
+                            <Stack.Screen
+                                name="Root"
+                                component={BottomTabNavigator}
+                            />
+                            <Stack.Screen
+                                name="OverviewDetailScreen"
+                                component={OverviewDetailScreen}
+                            />
+                            <Stack.Screen
+                                name="UserScreen"
+                                component={UserScreen}
+                            />
+                            <Stack.Screen
+                                name="ProjectDetailScreen"
+                                component={ProjectDetailScreen}
+                            />
+                            <Stack.Screen
+                                name="BlogDetailScreen"
+                                component={BlogDetailScreen}
+                            />
+                        </Stack.Navigator>
+                    </NavigationContainer>
+                </View>
+            </DataProvider>
         )
     }
 }

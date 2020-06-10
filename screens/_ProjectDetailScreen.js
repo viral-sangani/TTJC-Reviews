@@ -7,11 +7,12 @@ import MemberCard from '../components/Cards/MemberCard'
 import TopBar from '../components/TopBar'
 
 export default function ProjectDetailScreen({ navigation, route }) {
+    const { project } = route.params
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
             <TopBar
-                title={route.params.title}
+                title={`Project Issue - #${project.number}`}
                 navigation={navigation}
                 secondary={true}
             />
@@ -19,8 +20,12 @@ export default function ProjectDetailScreen({ navigation, route }) {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                {/* <MemberCard showCount={true} /> */}
-                <ProjectDetailCard />
+                <MemberCard
+                    user={project.author}
+                    navigation={navigation}
+                    showCount={false}
+                />
+                <ProjectDetailCard project={project} />
             </ScrollView>
         </View>
     )

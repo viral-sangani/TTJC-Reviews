@@ -4,8 +4,10 @@ import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import TopBar from '../components/TopBar'
 import ProjectCard from '../components/Cards/ProjectCard'
+import { DataContext } from '../API/Main'
 
 export default function ProjectScreen({ navigation }) {
+    const { projectData } = React.useContext(DataContext)
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
@@ -14,7 +16,18 @@ export default function ProjectScreen({ navigation }) {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                <ProjectCard navigation={navigation} />
+                {projectData &&
+                    projectData
+                        .slice(0)
+                        .reverse()
+                        .map((project) => {
+                            return (
+                                <ProjectCard
+                                    project={project}
+                                    navigation={navigation}
+                                />
+                            )
+                        })}
             </ScrollView>
         </View>
     )

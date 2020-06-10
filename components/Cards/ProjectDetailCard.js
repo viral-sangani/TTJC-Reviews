@@ -8,24 +8,25 @@ const data = `
 Hello Mentors,\r\n\r\nI have designed and developed a web application using:\r\n- [GatsbyJS](https://www.gatsbyjs.org/)\r\n- HTML5/CSS3\r\n- Hosted on serverless AWS S3/AWS CloudFront (CDN) and used AWS Lambda Functions.\r\n\r\nThe blog is responsive with Like function similar to [Medium.com](https://medium.com/) and subscribes option created using AWS Lambda function. \r\n\r\nThe project is live @ [https://blog.viralsangani.me/](https://blog.viralsangani.me/)\r\nThe [Github Link](https://github.com/viral-sangani/gatsby-blog)\r\n\r\n### Demo\r\n\r\n![Demo](https://raw.githubusercontent.com/viral-sangani/gatsby-blog/master/static/gatsby-blog-gif.gif)\r\n
 `
 
-const ProjectDetailCard = ({ projectCounter, showCount, navigation }) => {
-    console.log(navigation)
-    const handlePress = (title) => {
-        navigation.navigate('UserScreen', { title })
-    }
+const ProjectDetailCard = ({ project }) => {
     return (
         <View style={styles.mainView}>
             <View style={styles.content}>
                 <View style={{}}>
                     <Text style={styles.projectHeadingLabe}>Title:</Text>
+                    <Text style={styles.projectContent}>{project.title}</Text>
+                    <Text style={styles.projectHeadingLabe}>Author: </Text>
                     <Text style={styles.projectContent}>
-                        Blazing fast blog built with Gatsby and hosted
-                        serverlessly using AWS Lambda and S3
+                        {project.author.name}
                     </Text>
+
                     <Text style={styles.projectHeadingLabe}>Description:</Text>
                     <View style={{ marginHorizontal: 16 }}>
-                        <Markdown style={MarkdownStyles}>{data}</Markdown>
+                        <Markdown style={MarkdownStyles}>
+                            {project.body}
+                        </Markdown>
                     </View>
+                    <Text style={styles.projectHeadingLabe}>Date: </Text>
                 </View>
             </View>
         </View>

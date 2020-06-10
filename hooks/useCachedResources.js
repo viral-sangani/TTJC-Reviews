@@ -2,6 +2,8 @@ import { Ionicons } from '@expo/vector-icons'
 import * as Font from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import * as React from 'react'
+import { generateDataStructure } from '../API/Main'
+import AsyncStorage from '@react-native-community/async-storage'
 
 export default function useCachedResources() {
     const [isLoadingComplete, setLoadingComplete] = React.useState(false)
@@ -20,6 +22,12 @@ export default function useCachedResources() {
                     AirbnbCerealMedium: require('../assets/fonts/AirbnbCerealMedium.ttf'),
                     AirbnbCerealBook: require('../assets/fonts/AirbnbCerealBook.ttf'),
                 })
+                console.log(await AsyncStorage.getAllKeys())
+                project = await AsyncStorage.getItem('projectData')
+                if (!project) {
+                    console.log('generateDS called')
+                    await generateDataStructure()
+                }
             } catch (e) {
                 // We might want to provide this error information to an error reporting service
                 console.warn(e)

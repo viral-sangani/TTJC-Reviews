@@ -4,8 +4,10 @@ import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import MemberCard from '../components/Cards/MemberCard'
 import TopBar from '../components/TopBar'
+import { DataContext } from '../API/Main'
 
 export default function MemberScreen({ navigation }) {
+    const { userData } = React.useContext(DataContext)
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" />
@@ -14,7 +16,18 @@ export default function MemberScreen({ navigation }) {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                <MemberCard navigation={navigation} showCount={true} />
+                <View style={{ marginBottom: 20 }}>
+                    {userData
+                        .slice(0)
+                        .reverse()
+                        .map((user) => (
+                            <MemberCard
+                                user={user}
+                                navigation={navigation}
+                                showCount={true}
+                            />
+                        ))}
+                </View>
             </ScrollView>
         </View>
     )
