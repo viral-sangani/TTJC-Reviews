@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { Avatar } from 'react-native-paper'
+import { Avatar, Searchbar } from 'react-native-paper'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import Colors from '../constants/Colors'
@@ -9,6 +9,7 @@ const TopBar = ({ title, secondary, navigation, handleReloadData }) => {
     const backButton = () => {
         navigation.pop()
     }
+    console.log(navigation)
     return (
         <React.Fragment>
             <View style={styles.topBar}>
@@ -59,6 +60,16 @@ const TopBar = ({ title, secondary, navigation, handleReloadData }) => {
                         </>
                     )}
                 </View>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('SearchUserScreen')}
+                >
+                    <MaterialCommunityIcons
+                        style={{ marginRight: 0, color: '#fcfcfc' }}
+                        name="account-search"
+                        size={28}
+                        color="black"
+                    />
+                </TouchableOpacity>
                 <TouchableOpacity onPress={handleReloadData}>
                     <MaterialCommunityIcons
                         style={styles.rightContent}
