@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import { GIT_TOKEN } from 'react-native-dotenv'
 var iterateArray = []
 var totalCount = 0
 var uri = `https://api.github.com/graphql`
@@ -75,8 +76,7 @@ export const generateDataStructure = async () => {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Authorization:
-                    'Bearer b2b4751ae33cc8cc322ab2ccd7271be185ff5676',
+                Authorization: 'Bearer ' + GIT_TOKEN,
             },
         }
     )
@@ -133,8 +133,7 @@ async function getData() {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Authorization:
-                    'Bearer b2b4751ae33cc8cc322ab2ccd7271be185ff5676',
+                Authorization: 'Bearer ' + GIT_TOKEN,
             },
         }
     )
@@ -190,8 +189,7 @@ async function getData() {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    Authorization:
-                        'Bearer b2b4751ae33cc8cc322ab2ccd7271be185ff5676',
+                    Authorization: 'Bearer ' + GIT_TOKEN,
                 },
             }
         )

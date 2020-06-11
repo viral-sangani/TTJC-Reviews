@@ -53,9 +53,9 @@ const TopBar = ({ title, secondary, navigation, handleReloadData }) => {
                         <>
                             <Avatar.Image
                                 size={32}
-                                source={require('../assets/images/logo.jpeg')}
+                                source={require('../assets/images/logo.png')}
                             />
-                            <Text style={styles.appName}>TTJC Analytics</Text>
+                            <Text style={styles.appName}>TTJC Reviews</Text>
                         </>
                     )}
                 </View>

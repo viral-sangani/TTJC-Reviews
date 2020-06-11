@@ -9,15 +9,31 @@ import { DataContext } from '../API/Main'
 import Loader from '../components/Loader'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-export default function UserScreen({ navigation, route }) {
-    const { user } = route.params
-    const { reloadData } = React.useContext(DataContext)
+export default function ReviewPending({ navigation }) {
+    const { projectData, reloadData } = React.useContext(DataContext)
     const [loading, setLoading] = React.useState(false)
     const handleReload = async () => {
         setLoading(true)
         await reloadData()
         setLoading(false)
     }
+    var projectReviewPending = []
+    console.log(projectData.length)
+    projectData.map((project) => {
+        if (project.labels.edges.length > 0) {
+            if (
+                project.labels.edges.some((label) => {
+                    return label.name !== 'Reviewed-By-Mentor'
+                })
+            ) {
+                projectReviewPending.push(project)
+            }
+        } else {
+            console.log(`1`)
+            projectReviewPending.push(project)
+        }
+    })
+    console.log(projectReviewPending.length)
     return (
         <View style={styles.container}>
             <Spinner
@@ -29,7 +45,7 @@ export default function UserScreen({ navigation, route }) {
             />
             <StatusBar barStyle="light-content" />
             <TopBar
-                title={`@${user.login}`}
+                title={`Review Pending`}
                 navigation={navigation}
                 secondary={true}
                 handleReloadData={handleReload}
@@ -38,7 +54,7 @@ export default function UserScreen({ navigation, route }) {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                <MemberCard user={user} showCount={true} />
+                {/* <MemberCard user={user} showCount={true} />
                 {user.projects
                     .slice(0)
                     .reverse()
@@ -49,7 +65,7 @@ export default function UserScreen({ navigation, route }) {
                                 key={projectId}
                             />
                         )
-                    })}
+                    })} */}
                 {/* <UserProjectCard /> */}
             </ScrollView>
         </View>

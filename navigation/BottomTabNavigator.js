@@ -54,7 +54,7 @@ export default function BottomTabNavigator({ navigation, route }) {
                     ),
                 }}
             />
-            <BottomTab.Screen
+            {/* <BottomTab.Screen
                 name="Blogs"
                 component={BlogScreen}
                 options={{
@@ -63,7 +63,7 @@ export default function BottomTabNavigator({ navigation, route }) {
                         <TabBarIcon focused={focused} name="md-bookmarks" />
                     ),
                 }}
-            />
+            /> */}
         </BottomTab.Navigator>
     )
 }

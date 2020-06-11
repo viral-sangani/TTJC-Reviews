@@ -11,6 +11,7 @@ import ProjectDetailScreen from './screens/_ProjectDetailScreen'
 import BlogDetailScreen from './screens/_BlogDetailScreen'
 import UserScreen from './screens/_UserScreen'
 import { DataProvider } from './API/Main'
+import ReviewPending from './screens/_ReviewPending'
 
 const Stack = createStackNavigator()
 
@@ -46,6 +47,10 @@ export default function App(props) {
                             <Stack.Screen
                                 name="BlogDetailScreen"
                                 component={BlogDetailScreen}
+                            />
+                            <Stack.Screen
+                                name="ReviewPending"
+                                component={ReviewPending}
                             />
                         </Stack.Navigator>
                     </NavigationContainer>

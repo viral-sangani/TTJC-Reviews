@@ -1,5 +1,11 @@
 import * as React from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    View,
+    StatusBar,
+    TouchableOpacity,
+} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -44,51 +50,63 @@ export default function HomeScreen({ navigation }) {
                     </Text>
                 </View>
                 <View style={{ marginBottom: 30 }}>
-                    <LinearGradient
-                        colors={['#7A0168', '#FF0A78']}
-                        style={styles.gradientView}
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Projects')}
                     >
-                        <View>
-                            <Text style={styles.mainHeading}>
-                                Total Projects
-                            </Text>
-                            <Text style={styles.subHeading}>in the review</Text>
-                        </View>
-                        <AnimateNumber
-                            style={styles.counter}
-                            value={projectData.length}
-                            countBy={5}
-                            timing={(interval, progress) => {
-                                // slow start, slow end
-                                return (
-                                    interval *
-                                    (1 - Math.sin(Math.PI * progress)) *
-                                    10
-                                )
-                            }}
-                        />
-                    </LinearGradient>
-                    <View style={styles.mainView}>
-                        <View style={styles.leftView}>
+                        <LinearGradient
+                            colors={['#7A0168', '#FF0A78']}
+                            style={styles.gradientView}
+                        >
                             <View>
-                                <Text style={styles.mainHeading}>Projects</Text>
+                                <Text style={styles.mainHeading}>
+                                    Total Projects
+                                </Text>
                                 <Text style={styles.subHeading}>
-                                    in the review by
+                                    in the review
                                 </Text>
                             </View>
-                        </View>
-                        <View style={styles.rightView}>
                             <AnimateNumber
                                 style={styles.counter}
-                                value={userData.length}
-                                formatter={(val) => {
-                                    return parseInt(val)
+                                value={projectData.length}
+                                countBy={5}
+                                timing={(interval, progress) => {
+                                    // slow start, slow end
+                                    return (
+                                        interval *
+                                        (1 - Math.sin(Math.PI * progress)) *
+                                        10
+                                    )
                                 }}
-                                timing="easeOut"
                             />
-                            <Text style={styles.people}>People</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Member')}
+                    >
+                        <View style={styles.mainView}>
+                            <View style={styles.leftView}>
+                                <View>
+                                    <Text style={styles.mainHeading}>
+                                        Projects
+                                    </Text>
+                                    <Text style={styles.subHeading}>
+                                        in the review by
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.rightView}>
+                                <AnimateNumber
+                                    style={styles.counter}
+                                    value={userData.length}
+                                    formatter={(val) => {
+                                        return parseInt(val)
+                                    }}
+                                    timing="easeOut"
+                                />
+                                <Text style={styles.people}>People</Text>
+                            </View>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.mainView}>
                         <View style={styles.leftView}>
                             <View>
@@ -111,6 +129,9 @@ export default function HomeScreen({ navigation }) {
                             />
                         </View>
                     </View>
+                    {/* <TouchableOpacity
+                        onPress={() => navigation.navigate('ReviewPending')}
+                    > */}
                     <View style={styles.mainView}>
                         <View style={styles.leftView}>
                             <View>
@@ -130,6 +151,7 @@ export default function HomeScreen({ navigation }) {
                             />
                         </View>
                     </View>
+                    {/* </TouchableOpacity> */}
                 </View>
             </ScrollView>
         </View>
