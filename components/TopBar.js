@@ -9,7 +9,6 @@ const TopBar = ({ title, secondary, navigation, handleReloadData }) => {
     const backButton = () => {
         navigation.pop()
     }
-    console.log(navigation)
     return (
         <React.Fragment>
             <View style={styles.topBar}>

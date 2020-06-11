@@ -55,7 +55,6 @@ export const generateDataStructure = async () => {
     projects = []
     users = []
     labels = []
-    console.log('Starting....')
     let query = `
     query totalIssues{
       repositoryOwner(login: "tanaypratap") {
@@ -86,7 +85,6 @@ export const generateDataStructure = async () => {
 }
 
 async function getData() {
-    console.log('Getting data...')
     var cursor = ''
     let query = `query getdata{
                     repositoryOwner(login: "tanaypratap") {
@@ -139,7 +137,6 @@ async function getData() {
     )
 
     data = [...res.data.data.repositoryOwner.repository.issues.edges]
-    console.log('0 Call')
     cursor = getCursor(res.data.data.repositoryOwner.repository.issues.edges)
 
     for (let i = 1; i < iterateArray.length; i++) {
@@ -197,17 +194,13 @@ async function getData() {
             ...data,
             ...res.data.data.repositoryOwner.repository.issues.edges,
         ]
-        console.log(i + ' call')
         cursor = getCursor(
             res.data.data.repositoryOwner.repository.issues.edges
         )
     }
     getProjects(data)
-    console.log('generating Projet data')
     getUsers(projects)
-    console.log('generating User data')
     getLables(projects)
-    console.log('generating Label data')
 }
 
 function getTotalCount(data) {

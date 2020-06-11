@@ -16,7 +16,6 @@ export default function ReviewPending({ navigation }) {
         setLoading(false)
     }
     var projectReviewPending = []
-    console.log(projectData.length)
     projectData.map((project) => {
         if (project.labels.edges.length > 0) {
             if (
@@ -27,11 +26,9 @@ export default function ReviewPending({ navigation }) {
                 projectReviewPending.push(project)
             }
         } else {
-            console.log(`1`)
             projectReviewPending.push(project)
         }
     })
-    console.log(projectReviewPending.length)
     return (
         <View style={styles.container}>
             <Spinner
