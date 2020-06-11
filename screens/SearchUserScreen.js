@@ -1,12 +1,8 @@
 import * as React from 'react'
-import { StyleSheet, View, StatusBar } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
-import TopBar from '../components/TopBar'
-import ProjectCard from '../components/Cards/ProjectCard'
 import { DataContext } from '../API/Main'
-import Loader from '../components/Loader'
-import Spinner from 'react-native-loading-spinner-overlay'
 import { Searchbar } from 'react-native-paper'
 import MemberCard from '../components/Cards/MemberCard'
 

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
+import { StyleSheet, View, StatusBar } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import MemberCard from '../components/Cards/MemberCard'

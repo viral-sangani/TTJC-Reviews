@@ -11,7 +11,7 @@ import Colors from '../constants/Colors'
 import { LinearGradient } from 'expo-linear-gradient'
 import TopBar from '../components/TopBar'
 import AnimateNumber from 'react-native-animate-number'
-import { DataContext, generateDataStructure } from '../API/Main'
+import { DataContext } from '../API/Main'
 import Loader from '../components/Loader'
 import Spinner from 'react-native-loading-spinner-overlay'
 

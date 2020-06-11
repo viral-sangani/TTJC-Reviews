@@ -1,12 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Colors from '../../constants/Colors'
 import Markdown from 'react-native-markdown-display'
-// import MarkdownStyles from '../../constants/MarkdownStyles'
-
-const data = `
-Hello Mentors,\r\n\r\nI have designed and developed a web application using:\r\n- [GatsbyJS](https://www.gatsbyjs.org/)\r\n- HTML5/CSS3\r\n- Hosted on serverless AWS S3/AWS CloudFront (CDN) and used AWS Lambda Functions.\r\n\r\nThe blog is responsive with Like function similar to [Medium.com](https://medium.com/) and subscribes option created using AWS Lambda function. \r\n\r\nThe project is live @ [https://blog.viralsangani.me/](https://blog.viralsangani.me/)\r\nThe [Github Link](https://github.com/viral-sangani/gatsby-blog)\r\n\r\n### Demo\r\n\r\n![Demo](https://raw.githubusercontent.com/viral-sangani/gatsby-blog/master/static/gatsby-blog-gif.gif)\r\n
-`
 
 const ProjectDetailCard = ({ project }) => {
     return (
