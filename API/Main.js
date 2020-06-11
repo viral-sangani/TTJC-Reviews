@@ -7,13 +7,8 @@ var uri = `https://api.github.com/graphql`
 var data = []
 var projects = []
 var users = []
-var Overviews = {
-    fiveProjects: 0,
-    fourProjects: 0,
-    threeProjects: 0,
-    twoProjects: 0,
-    oneProjects: 0,
-}
+var notReviwed = []
+var reviwed = []
 var labels = []
 const regexProject = /\[[pP]roject[- 0-9a-zA-Z]*[\[0-9a-zA-Z \]]*(\])(?!.*\])[ -]*/
 
@@ -23,12 +18,16 @@ export const DataProvider = ({ children }) => {
     const [projectData, setProjectData] = React.useState(projects)
     const [userData, setUserData] = React.useState(users)
     const [lableData, setLableData] = React.useState(labels)
+    const [notReviwedData, setNotReviwedData] = React.useState(notReviwed)
+    const [reviwedData, setReviwedData] = React.useState(reviwed)
 
     const reloadData = async () => {
         let data = await generateDataStructure()
         setProjectData(data.projects)
         setUserData(data.users)
         setLableData(data.labels)
+        setNotReviwedData(data.notReviwed)
+        setReviwedData(data.reviwed)
     }
 
     return (
@@ -41,6 +40,10 @@ export const DataProvider = ({ children }) => {
                 lableData,
                 setLableData,
                 reloadData,
+                notReviwedData,
+                setNotReviwedData,
+                reviwedData,
+                setReviwedData,
             }}
         >
             {children}
@@ -55,6 +58,8 @@ export const generateDataStructure = async () => {
     projects = []
     users = []
     labels = []
+    notReviwed = []
+    reviwed = []
     let query = `
     query totalIssues{
       repositoryOwner(login: "tanaypratap") {
@@ -81,7 +86,7 @@ export const generateDataStructure = async () => {
     )
     getTotalCount(p1.data)
     await getData()
-    return { projects, labels, users }
+    return { projects, labels, users, reviwed, notReviwed }
 }
 
 async function getData() {
@@ -201,6 +206,26 @@ async function getData() {
     getProjects(data)
     getUsers(projects)
     getLables(projects)
+    getReviwedData(projects)
+}
+
+const getReviwedData = (projects) => {
+    projects.map((project) => {
+        var temp = false
+        if (project.labels.edges.length > 0) {
+            project.labels.edges.map((label) => {
+                if (label.node.name === 'Reviewed-By-Mentor') {
+                    temp = true
+                    reviwed.push(project)
+                }
+            })
+            if (!temp) {
+                notReviwed.push(project)
+            }
+        } else {
+            notReviwed.push(project)
+        }
+    })
 }
 
 function getTotalCount(data) {

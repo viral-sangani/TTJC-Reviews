@@ -8,11 +8,12 @@ import BottomTabNavigator from './navigation/BottomTabNavigator'
 import LinkingConfiguration from './navigation/LinkingConfiguration'
 import OverviewDetailScreen from './screens/_OverviewDetailScreen'
 import ProjectDetailScreen from './screens/_ProjectDetailScreen'
-import BlogDetailScreen from './screens/_BlogDetailScreen'
 import UserScreen from './screens/_UserScreen'
 import { DataProvider } from './API/Main'
 import ReviewPending from './screens/_ReviewPending'
 import SearchUserScreen from './screens/SearchUserScreen'
+import ProjectReview from './screens/_ProjectReviews'
+import ProjectNotReviewed from './screens/_ProjectNotReviewed'
 
 const Stack = createStackNavigator()
 
@@ -46,16 +47,20 @@ export default function App(props) {
                                 component={ProjectDetailScreen}
                             />
                             <Stack.Screen
-                                name="BlogDetailScreen"
-                                component={BlogDetailScreen}
-                            />
-                            <Stack.Screen
                                 name="ReviewPending"
                                 component={ReviewPending}
                             />
                             <Stack.Screen
                                 name="SearchUserScreen"
                                 component={SearchUserScreen}
+                            />
+                            <Stack.Screen
+                                name="ProjectReview"
+                                component={ProjectReview}
+                            />
+                            <Stack.Screen
+                                name="ProjectNotReviewed"
+                                component={ProjectNotReviewed}
                             />
                         </Stack.Navigator>
                     </NavigationContainer>

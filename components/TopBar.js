@@ -59,24 +59,26 @@ const TopBar = ({ title, secondary, navigation, handleReloadData }) => {
                         </>
                     )}
                 </View>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('SearchUserScreen')}
-                >
-                    <MaterialCommunityIcons
-                        style={{ marginRight: 0, color: '#fcfcfc' }}
-                        name="account-search"
-                        size={28}
-                        color="black"
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleReloadData}>
-                    <MaterialCommunityIcons
-                        style={styles.rightContent}
-                        name="reload"
-                        size={28}
-                        color="black"
-                    />
-                </TouchableOpacity>
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('SearchUserScreen')}
+                    >
+                        <MaterialCommunityIcons
+                            style={{ marginRight: 12, color: '#fcfcfc' }}
+                            name="account-search"
+                            size={28}
+                            color="black"
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleReloadData}>
+                        <MaterialCommunityIcons
+                            style={styles.rightContent}
+                            name="reload"
+                            size={28}
+                            color="black"
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
         </React.Fragment>
     )

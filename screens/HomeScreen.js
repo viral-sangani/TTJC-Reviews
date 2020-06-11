@@ -16,16 +16,22 @@ import Loader from '../components/Loader'
 import Spinner from 'react-native-loading-spinner-overlay'
 
 export default function HomeScreen({ navigation }) {
-    const { projectData, userData, lableData, reloadData } = React.useContext(
-        DataContext
-    )
+    const {
+        projectData,
+        userData,
+        lableData,
+        reviwedData,
+        reloadData,
+        notReviwedData,
+    } = React.useContext(DataContext)
     const [loading, setLoading] = React.useState(false)
     const handleReload = async () => {
         setLoading(true)
         await reloadData()
         setLoading(false)
     }
-
+    // console.log('reviwedData', reviwedData.length)
+    // console.log('notReviwedData', notReviwedData.length)
     return (
         <View style={styles.container}>
             <Spinner
@@ -107,51 +113,59 @@ export default function HomeScreen({ navigation }) {
                             </View>
                         </View>
                     </TouchableOpacity>
-                    <View style={styles.mainView}>
-                        <View style={styles.leftView}>
-                            <View>
-                                <Text style={styles.mainHeading}>
-                                    Projects Reviewed
-                                </Text>
-                                <Text style={styles.subHeading}>
-                                    with label - "Reviewed-By-Mentor"
-                                </Text>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('ProjectReview')}
+                    >
+                        <View style={styles.mainView}>
+                            <View style={styles.leftView}>
+                                <View>
+                                    <Text style={styles.mainHeading}>
+                                        Projects Reviewed
+                                    </Text>
+                                    <Text style={styles.subHeading}>
+                                        with label - "Reviewed-By-Mentor"
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.rightView}>
+                                <AnimateNumber
+                                    style={styles.counter}
+                                    value={lableData.length}
+                                    formatter={(val) => {
+                                        return parseInt(val)
+                                    }}
+                                    timing="easeOut"
+                                />
                             </View>
                         </View>
-                        <View style={styles.rightView}>
-                            <AnimateNumber
-                                style={styles.counter}
-                                value={lableData.length}
-                                formatter={(val) => {
-                                    return parseInt(val)
-                                }}
-                                timing="easeOut"
-                            />
-                        </View>
-                    </View>
-                    {/* <TouchableOpacity
-                        onPress={() => navigation.navigate('ReviewPending')}
-                    > */}
-                    <View style={styles.mainView}>
-                        <View style={styles.leftView}>
-                            <View>
-                                <Text style={styles.mainHeading}>
-                                    Pending Reviews
-                                </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() =>
+                            navigation.navigate('ProjectNotReviewed')
+                        }
+                    >
+                        <View style={styles.mainView}>
+                            <View style={styles.leftView}>
+                                <View>
+                                    <Text style={styles.mainHeading}>
+                                        Pending Reviews
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.rightView}>
+                                <AnimateNumber
+                                    style={styles.counter}
+                                    value={
+                                        projectData.length - lableData.length
+                                    }
+                                    formatter={(val) => {
+                                        return parseInt(val)
+                                    }}
+                                    timing="easeOut"
+                                />
                             </View>
                         </View>
-                        <View style={styles.rightView}>
-                            <AnimateNumber
-                                style={styles.counter}
-                                value={projectData.length - lableData.length}
-                                formatter={(val) => {
-                                    return parseInt(val)
-                                }}
-                                timing="easeOut"
-                            />
-                        </View>
-                    </View>
-                    {/* </TouchableOpacity> */}
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </View>

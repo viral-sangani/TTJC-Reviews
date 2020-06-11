@@ -39,7 +39,7 @@ const ProjectDetailCard = ({ project }) => {
                             )
                         }}
                     >
-                        Open in Github
+                        Read review on Github
                     </Text>
                 </View>
             </View>

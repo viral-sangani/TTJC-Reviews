@@ -125,7 +125,14 @@ const MemberCard = ({ touchAble, user, showCount, navigation }) => {
                             size={20}
                             color="white"
                         />
-                        <Text style={styles.githubUsername}>
+                        <Text
+                            style={styles.githubUsername}
+                            onPress={() => {
+                                Linking.openURL(
+                                    `https://www.github.com/${user.login}`
+                                )
+                            }}
+                        >
                             @
                             {user.login.length > 16
                                 ? user.login.substring(0, 16 - 3) + '...'

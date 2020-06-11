@@ -6,7 +6,6 @@ import TabBarIcon from '../components/TabBarIcon'
 import HomeScreen from '../screens/HomeScreen'
 import MemberScreen from '../screens/MemberScreen'
 import ProjectsScreen from '../screens/ProjectsScreen'
-import BlogScreen from '../screens/BlogScreen'
 
 const BottomTab = createBottomTabNavigator()
 const INITIAL_ROUTE_NAME = 'Home'
@@ -54,16 +53,6 @@ export default function BottomTabNavigator({ navigation, route }) {
                     ),
                 }}
             />
-            {/* <BottomTab.Screen
-                name="Blogs"
-                component={BlogScreen}
-                options={{
-                    title: 'Blogs',
-                    tabBarIcon: ({ focused }) => (
-                        <TabBarIcon focused={focused} name="md-bookmarks" />
-                    ),
-                }}
-            /> */}
         </BottomTab.Navigator>
     )
 }

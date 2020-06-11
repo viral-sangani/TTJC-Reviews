@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native'
 import Colors from '../../constants/Colors'
 import { Avatar } from 'react-native-paper'
 import { AntDesign } from '@expo/vector-icons'
@@ -60,7 +60,15 @@ const ProjectCard = ({ project, navigation }) => {
                                     />
                                 )}
                             />
-                            <Text style={styles.githubUsername}>
+                            <Text
+                                style={styles.githubUsername}
+                                onPress={() => {
+                                    Linking.openURL(
+                                        `https://www.github.com/${project.author.login}`
+                                    )
+                                }}
+                            >
+                                @
                                 {project.author.login &&
                                 project.author.login.length > 16
                                     ? project.author.login.substring(

@@ -1,16 +1,15 @@
 import * as React from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
+import { StyleSheet, View, StatusBar, FlatList } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
-import BlogDetailCard from '../components/Cards/BlogDetailCard'
-import MemberCard from '../components/Cards/MemberCard'
 import TopBar from '../components/TopBar'
+import ProjectCard from '../components/Cards/ProjectCard'
 import { DataContext } from '../API/Main'
 import Loader from '../components/Loader'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-export default function BlogDetailScreen({ navigation, route }) {
-    const { reloadData } = React.useContext(DataContext)
+export default function ProjectNotReviewed({ navigation }) {
+    const { notReviwedData, reloadData } = React.useContext(DataContext)
     const [loading, setLoading] = React.useState(false)
     const handleReload = async () => {
         setLoading(true)
@@ -28,17 +27,20 @@ export default function BlogDetailScreen({ navigation, route }) {
             />
             <StatusBar barStyle="light-content" />
             <TopBar
-                title={route.params.title}
+                title={`Review Pending`}
                 navigation={navigation}
                 secondary={true}
                 handleReloadData={handleReload}
             />
-            <ScrollView
-                style={styles.container}
-                contentContainerStyle={styles.contentContainer}
-            >
-                <BlogDetailCard />
-            </ScrollView>
+            <FlatList
+                data={notReviwedData.slice(0).reverse()}
+                renderItem={({ item }) => {
+                    return (
+                        <ProjectCard project={item} navigation={navigation} />
+                    )
+                }}
+                keyExtractor={(item) => item.id}
+            />
         </View>
     )
 }

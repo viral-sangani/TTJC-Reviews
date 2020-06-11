@@ -41,7 +41,7 @@ const UserProjectCard = ({ projectId }) => {
                             )
                         }}
                     >
-                        Open in Github
+                        Read review on Github
                     </Text>
                 </View>
             </View>

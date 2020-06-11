@@ -1,15 +1,15 @@
 import * as React from 'react'
-import { StyleSheet, View, StatusBar } from 'react-native'
+import { StyleSheet, View, StatusBar, FlatList } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import TopBar from '../components/TopBar'
-import BlogCard from '../components/Cards/BlogCard'
+import ProjectCard from '../components/Cards/ProjectCard'
+import { DataContext } from '../API/Main'
 import Loader from '../components/Loader'
 import Spinner from 'react-native-loading-spinner-overlay'
-import { DataContext } from '../API/Main'
 
-export default function BlogScreen({ navigation }) {
-    const { reloadData } = React.useContext(DataContext)
+export default function ProjectReview({ navigation }) {
+    const { reviwedData, reloadData } = React.useContext(DataContext)
     const [loading, setLoading] = React.useState(false)
     const handleReload = async () => {
         setLoading(true)
@@ -26,13 +26,21 @@ export default function BlogScreen({ navigation }) {
                 children={<Loader />}
             />
             <StatusBar barStyle="light-content" />
-            <TopBar navigation={navigation} handleReloadData={handleReload} />
-            <ScrollView
-                style={styles.container}
-                contentContainerStyle={styles.contentContainer}
-            >
-                <BlogCard navigation={navigation} />
-            </ScrollView>
+            <TopBar
+                title={`Projects Reviewd`}
+                navigation={navigation}
+                secondary={true}
+                handleReloadData={handleReload}
+            />
+            <FlatList
+                data={reviwedData.slice(0).reverse()}
+                renderItem={({ item }) => {
+                    return (
+                        <ProjectCard project={item} navigation={navigation} />
+                    )
+                }}
+                keyExtractor={(item) => item.id}
+            />
         </View>
     )
 }
