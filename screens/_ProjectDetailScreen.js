@@ -11,7 +11,7 @@ import Spinner from 'react-native-loading-spinner-overlay'
 
 export default function ProjectDetailScreen({ navigation, route }) {
     const { project } = route.params
-    const { reloadData } = React.useContext(DataContext)
+    const { userData, reloadData } = React.useContext(DataContext)
     const [loading, setLoading] = React.useState(false)
     const handleReload = async () => {
         setLoading(true)
@@ -40,7 +40,9 @@ export default function ProjectDetailScreen({ navigation, route }) {
             >
                 <MemberCard
                     touchAble={false}
-                    user={project.author}
+                    user={userData.find((item) => {
+                        return item.id === project.author.id
+                    })}
                     navigation={navigation}
                     showCount={true}
                 />

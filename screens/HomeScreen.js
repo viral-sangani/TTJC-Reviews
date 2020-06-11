@@ -87,10 +87,10 @@ export default function HomeScreen({ navigation }) {
                             <View style={styles.leftView}>
                                 <View>
                                     <Text style={styles.mainHeading}>
-                                        Projects
+                                        Active Users
                                     </Text>
                                     <Text style={styles.subHeading}>
-                                        in the review by
+                                        who have submitted projects
                                     </Text>
                                 </View>
                             </View>
@@ -111,7 +111,7 @@ export default function HomeScreen({ navigation }) {
                         <View style={styles.leftView}>
                             <View>
                                 <Text style={styles.mainHeading}>
-                                    Projects Reviwed
+                                    Projects Reviewed
                                 </Text>
                                 <Text style={styles.subHeading}>
                                     with label - "Reviewed-By-Mentor"
@@ -136,7 +136,7 @@ export default function HomeScreen({ navigation }) {
                         <View style={styles.leftView}>
                             <View>
                                 <Text style={styles.mainHeading}>
-                                    Review Pending
+                                    Pending Reviews
                                 </Text>
                             </View>
                         </View>
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     subHeading: {
         fontFamily: 'AirbnbCerealBold',
         color: '#fcfcfc',
-        fontSize: 12,
+        fontSize: 13,
         marginLeft: 30,
     },
     counter: {

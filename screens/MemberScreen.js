@@ -26,7 +26,7 @@ export default function MemberScreen({ navigation }) {
                 children={<Loader />}
             />
             <StatusBar barStyle="light-content" />
-            <TopBar handleReloadData={handleReload} />
+            <TopBar handleReloadData={handleReload} navigation={navigation} />
             <FlatList
                 data={userData.slice(0).reverse()}
                 renderItem={({ item }) => {

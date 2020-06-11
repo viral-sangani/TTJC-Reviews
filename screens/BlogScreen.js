@@ -26,7 +26,7 @@ export default function BlogScreen({ navigation }) {
                 children={<Loader />}
             />
             <StatusBar barStyle="light-content" />
-            <TopBar handleReloadData={handleReload} />
+            <TopBar navigation={navigation} handleReloadData={handleReload} />
             <ScrollView
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}

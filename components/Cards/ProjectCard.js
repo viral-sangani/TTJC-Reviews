@@ -10,7 +10,24 @@ const ProjectCard = ({ project, navigation }) => {
     const handlePress = () => {
         navigation.navigate('ProjectDetailScreen', { project })
     }
-
+    var showTick = false
+    const checkReview = (labels) => {
+        if (labels.length > 0) {
+            labels.map((label) => {
+                if (label.node.name === 'Reviewed-By-Mentor') {
+                    showTick = true
+                    return
+                } else {
+                    showTick = false
+                    return
+                }
+            })
+        } else {
+            showTick = false
+            return
+        }
+    }
+    checkReview(project.labels.edges)
     return (
         <TouchableOpacity onPress={handlePress}>
             <View style={styles.mainView}>
@@ -20,7 +37,15 @@ const ProjectCard = ({ project, navigation }) => {
                             {project.title.length > maxlimit
                                 ? project.title.substring(0, maxlimit - 3) +
                                   '...'
-                                : project.title}
+                                : project.title}{' '}
+                            {showTick && (
+                                <AntDesign
+                                    style={{ paddingLeft: 12 }}
+                                    name="checkcircle"
+                                    size={16}
+                                    color="#0cff00"
+                                />
+                            )}
                         </Text>
                         <View style={styles.githubView}>
                             <Avatar.Icon

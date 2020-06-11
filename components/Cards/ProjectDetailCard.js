@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Linking } from 'react-native'
 import Colors from '../../constants/Colors'
 import Markdown from 'react-native-markdown-display'
 
@@ -24,6 +24,22 @@ const ProjectDetailCard = ({ project }) => {
                     <Text style={styles.projectHeadingLabe}>Date: </Text>
                     <Text style={styles.projectContent}>
                         {project.createdAt.substring(0, 10)}
+                    </Text>
+                    <Text
+                        style={{
+                            fontFamily: 'AirbnbCerealMedium',
+                            fontSize: 14,
+                            color: 'lightblue',
+                            margin: 16,
+                            textDecorationLine: 'underline',
+                        }}
+                        onPress={() => {
+                            Linking.openURL(
+                                `https://github.com/tanaypratap/teamtanay.jobchallenge.dev/issues/${project.number}`
+                            )
+                        }}
+                    >
+                        Open in Github
                     </Text>
                 </View>
             </View>

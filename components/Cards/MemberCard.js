@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native'
 import Colors from '../../constants/Colors'
 import { Avatar } from 'react-native-paper'
 import AnimateNumber from 'react-native-animate-number'
@@ -38,7 +38,14 @@ const MemberCard = ({ touchAble, user, showCount, navigation }) => {
                                     size={20}
                                     color="white"
                                 />
-                                <Text style={styles.githubUsername}>
+                                <Text
+                                    style={styles.githubUsername}
+                                    onPress={() => {
+                                        Linking.openURL(
+                                            `https://www.github.com/${user.login}`
+                                        )
+                                    }}
+                                >
                                     @
                                     {user.login.length > 16
                                         ? user.login.substring(0, 16 - 3) +
