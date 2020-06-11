@@ -27,23 +27,15 @@ export default function ProjectScreen({ navigation }) {
             />
             <StatusBar barStyle="light-content" />
             <TopBar handleReloadData={handleReload} />
-            <ScrollView
-                style={styles.container}
-                contentContainerStyle={styles.contentContainer}
-            >
-                <FlatList
-                    data={projectData.slice(0).reverse()}
-                    renderItem={({ item }) => {
-                        return (
-                            <ProjectCard
-                                project={item}
-                                navigation={navigation}
-                            />
-                        )
-                    }}
-                    keyExtractor={(item) => item.id}
-                />
-            </ScrollView>
+            <FlatList
+                data={projectData.slice(0).reverse()}
+                renderItem={({ item }) => {
+                    return (
+                        <ProjectCard project={item} navigation={navigation} />
+                    )
+                }}
+                keyExtractor={(item) => item.id}
+            />
         </View>
     )
 }

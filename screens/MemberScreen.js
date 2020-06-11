@@ -27,27 +27,20 @@ export default function MemberScreen({ navigation }) {
             />
             <StatusBar barStyle="light-content" />
             <TopBar handleReloadData={handleReload} />
-            <ScrollView
-                style={styles.container}
-                contentContainerStyle={styles.contentContainer}
-            >
-                <View style={{ marginBottom: 20 }}>
-                    <FlatList
-                        data={userData.slice(0).reverse()}
-                        renderItem={({ item }) => {
-                            return (
-                                <MemberCard
-                                    touchAble={true}
-                                    user={item}
-                                    navigation={navigation}
-                                    showCount={true}
-                                />
-                            )
-                        }}
-                        keyExtractor={(item) => item.id}
-                    />
-                </View>
-            </ScrollView>
+            <FlatList
+                data={userData.slice(0).reverse()}
+                renderItem={({ item }) => {
+                    return (
+                        <MemberCard
+                            touchAble={true}
+                            user={item}
+                            navigation={navigation}
+                            showCount={true}
+                        />
+                    )
+                }}
+                keyExtractor={(item) => item.id}
+            />
         </View>
     )
 }

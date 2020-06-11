@@ -29,27 +29,22 @@ export default function SearchUserScreen({ navigation }) {
                 value={search}
                 autoFocus={true}
             />
-            <ScrollView
-                style={styles.container}
-                contentContainerStyle={styles.contentContainer}
-            >
-                <View style={{ marginBottom: 20 }}>
-                    <FlatList
-                        data={data.slice(0).reverse()}
-                        renderItem={({ item }) => {
-                            return (
-                                <MemberCard
-                                    touchAble={true}
-                                    user={item}
-                                    navigation={navigation}
-                                    showCount={true}
-                                />
-                            )
-                        }}
-                        keyExtractor={(item) => item.id}
-                    />
-                </View>
-            </ScrollView>
+            <View style={{ marginBottom: 20 }}>
+                <FlatList
+                    data={data.slice(0).reverse()}
+                    renderItem={({ item }) => {
+                        return (
+                            <MemberCard
+                                touchAble={true}
+                                user={item}
+                                navigation={navigation}
+                                showCount={true}
+                            />
+                        )
+                    }}
+                    keyExtractor={(item) => item.id}
+                />
+            </View>
         </View>
     )
 }
