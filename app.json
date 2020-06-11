@@ -1,9 +1,9 @@
 {
     "expo": {
-        "name": "TTJC-Analytics",
-        "slug": "ttjc-analytics",
+        "name": "TTJC Review",
+        "slug": "ttjc-reviews",
         "android": {
-            "package": "com.viralsangani.ttjcanalytics",
+            "package": "com.viralsangani.ttjcreviews",
             "versionCode": 1
         },
         "platforms": ["ios", "android", "web"],

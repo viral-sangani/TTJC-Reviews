@@ -37,6 +37,7 @@ export default function MemberScreen({ navigation }) {
                         renderItem={({ item }) => {
                             return (
                                 <MemberCard
+                                    touchAble={true}
                                     user={item}
                                     navigation={navigation}
                                     showCount={true}

@@ -38,7 +38,7 @@ export default function UserScreen({ navigation, route }) {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                <MemberCard user={user} showCount={true} />
+                <MemberCard touchAble={false} user={user} showCount={true} />
                 {user.projects
                     .slice(0)
                     .reverse()

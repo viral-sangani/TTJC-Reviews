@@ -39,9 +39,10 @@ export default function ProjectDetailScreen({ navigation, route }) {
                 contentContainerStyle={styles.contentContainer}
             >
                 <MemberCard
+                    touchAble={false}
                     user={project.author}
                     navigation={navigation}
-                    showCount={false}
+                    showCount={true}
                 />
                 <ProjectDetailCard project={project} />
             </ScrollView>

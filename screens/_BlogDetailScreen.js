@@ -37,7 +37,6 @@ export default function BlogDetailScreen({ navigation, route }) {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                {/* <MemberCard showCount={true} /> */}
                 <BlogDetailCard />
             </ScrollView>
         </View>
