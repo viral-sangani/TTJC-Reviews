@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import { DataContext } from '../API/Main'
@@ -34,18 +34,19 @@ export default function SearchUserScreen({ navigation }) {
                 contentContainerStyle={styles.contentContainer}
             >
                 <View style={{ marginBottom: 20 }}>
-                    {data
-                        .slice(0)
-                        .reverse()
-                        .map((user) => (
-                            <MemberCard
-                                key={user.id}
-                                id={user.id}
-                                user={user}
-                                navigation={navigation}
-                                showCount={true}
-                            />
-                        ))}
+                    <FlatList
+                        data={data.slice(0).reverse()}
+                        renderItem={({ item }) => {
+                            return (
+                                <MemberCard
+                                    user={item}
+                                    navigation={navigation}
+                                    showCount={true}
+                                />
+                            )
+                        }}
+                        keyExtractor={(item) => item.id}
+                    />
                 </View>
             </ScrollView>
         </View>

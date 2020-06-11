@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View, StatusBar } from 'react-native'
+import { StyleSheet, View, StatusBar, FlatList } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import TopBar from '../components/TopBar'
@@ -31,20 +31,18 @@ export default function ProjectScreen({ navigation }) {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                {projectData &&
-                    projectData
-                        .slice(0)
-                        .reverse()
-                        .map((project) => {
-                            return (
-                                <ProjectCard
-                                    key={project.id}
-                                    id={project.id}
-                                    project={project}
-                                    navigation={navigation}
-                                />
-                            )
-                        })}
+                <FlatList
+                    data={projectData.slice(0).reverse()}
+                    renderItem={({ item }) => {
+                        return (
+                            <ProjectCard
+                                project={item}
+                                navigation={navigation}
+                            />
+                        )
+                    }}
+                    keyExtractor={(item) => item.id}
+                />
             </ScrollView>
         </View>
     )

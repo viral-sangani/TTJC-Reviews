@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View, StatusBar } from 'react-native'
+import { StyleSheet, View, Text, StatusBar, FlatList } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Colors from '../constants/Colors'
 import MemberCard from '../components/Cards/MemberCard'
@@ -32,18 +32,19 @@ export default function MemberScreen({ navigation }) {
                 contentContainerStyle={styles.contentContainer}
             >
                 <View style={{ marginBottom: 20 }}>
-                    {userData
-                        .slice(0)
-                        .reverse()
-                        .map((user) => (
-                            <MemberCard
-                                key={user.id}
-                                id={user.id}
-                                user={user}
-                                navigation={navigation}
-                                showCount={true}
-                            />
-                        ))}
+                    <FlatList
+                        data={userData.slice(0).reverse()}
+                        renderItem={({ item }) => {
+                            return (
+                                <MemberCard
+                                    user={item}
+                                    navigation={navigation}
+                                    showCount={true}
+                                />
+                            )
+                        }}
+                        keyExtractor={(item) => item.id}
+                    />
                 </View>
             </ScrollView>
         </View>
