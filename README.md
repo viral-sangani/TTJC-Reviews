@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-    Download URL - <a href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40viral-sangani/ttjc-reviews-edbbb6ae7bcf4781acfbda7c288d006b-signed.apk">REact Native Expo download link</a>
+    Download URL - <a href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40viral-sangani/ttjc-reviews-edbbb6ae7bcf4781acfbda7c288d006b-signed.apk">React Native Expo download link</a>
 </p>
 
 # A React Native App
