@@ -12,9 +12,9 @@
         "icon": "./assets/images/logo.png",
         "scheme": "myapp",
         "splash": {
-            "image": "./assets/images/splash.png",
+            "image": "./assets/images/splash-screen.png",
             "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "#092C5C"
         },
         "updates": {
             "fallbackToCacheTimeout": 0

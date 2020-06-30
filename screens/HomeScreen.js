@@ -14,16 +14,12 @@ import AnimateNumber from 'react-native-animate-number'
 import { DataContext } from '../API/Main'
 import Loader from '../components/Loader'
 import Spinner from 'react-native-loading-spinner-overlay'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 export default function HomeScreen({ navigation }) {
-    const {
-        projectData,
-        userData,
-        lableData,
-        reviwedData,
-        reloadData,
-        notReviwedData,
-    } = React.useContext(DataContext)
+    const { projectData, userData, lableData, reloadData } = React.useContext(
+        DataContext
+    )
     const [loading, setLoading] = React.useState(false)
     const handleReload = async () => {
         setLoading(true)
@@ -48,13 +44,13 @@ export default function HomeScreen({ navigation }) {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
             >
-                <View style={styles.alertView}>
+                {/* <View style={styles.alertView}>
                     <Text style={styles.alertText}>
                         Projects are tracked via Issues from official repository
                         of Team Tanay Job Challenge
                         (2020.teamtanay.jobchallenge.dev).
                     </Text>
-                </View>
+                </View> */}
                 <View style={{ marginBottom: 30 }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Projects')}
@@ -167,6 +163,23 @@ export default function HomeScreen({ navigation }) {
                         </View>
                     </TouchableOpacity>
                 </View>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        marginRight: 50,
+                        marginLeft: 20,
+                    }}
+                >
+                    <MaterialCommunityIcons
+                        name="information-outline"
+                        size={24}
+                        color="white"
+                    />
+                    <Text style={styles.alertText}>
+                        Projects are tracked via Issues from official repository
+                        of Team Tanay Job Challenge.
+                    </Text>
+                </View>
             </ScrollView>
         </View>
     )
@@ -208,15 +221,11 @@ const styles = StyleSheet.create({
         marginRight: 40,
         color: 'white',
     },
-    alertView: {
-        backgroundColor: 'yellow',
-        height: 35,
-        justifyContent: 'center',
-    },
     alertText: {
-        marginHorizontal: 20,
+        marginLeft: 10,
         fontFamily: 'AirbnbCerealMedium',
-        fontSize: 10,
+        fontSize: 12,
+        color: '#fcfcfc',
     },
     mainView: {
         backgroundColor: Colors.secondaryBg,
