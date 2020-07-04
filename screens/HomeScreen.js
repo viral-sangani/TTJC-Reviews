@@ -14,7 +14,7 @@ import AnimateNumber from 'react-native-animate-number'
 import { DataContext } from '../API/Main'
 import Loader from '../components/Loader'
 import Spinner from 'react-native-loading-spinner-overlay'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default function HomeScreen({ navigation }) {
     const { projectData, userData, lableData, reloadData } = React.useContext(

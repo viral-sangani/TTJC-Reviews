@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native'
 import Colors from '../../constants/Colors'
 import { Avatar } from 'react-native-paper'
-import { AntDesign } from '@expo/vector-icons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const maxlimit = 75
 

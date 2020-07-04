@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native'
 import Colors from '../../constants/Colors'
 import { Avatar } from 'react-native-paper'
 import AnimateNumber from 'react-native-animate-number'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { AntDesign } from '@expo/vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const MemberCard = ({ touchAble, user, showCount, navigation }) => {
     const handlePress = () => {
@@ -33,10 +33,19 @@ const MemberCard = ({ touchAble, user, showCount, navigation }) => {
                                     : user.name}
                             </Text>
                             <View style={styles.githubText}>
-                                <MaterialCommunityIcons
-                                    name="github-circle"
-                                    size={20}
-                                    color="white"
+                                <Avatar.Icon
+                                    size={16}
+                                    style={{
+                                        backgroundColor: Colors.primaryBg,
+                                    }}
+                                    color={Colors.primaryBg}
+                                    icon={() => (
+                                        <AntDesign
+                                            name="github"
+                                            size={16}
+                                            color="#fcfcfc"
+                                        />
+                                    )}
                                 />
                                 <Text
                                     style={styles.githubUsername}
@@ -120,10 +129,17 @@ const MemberCard = ({ touchAble, user, showCount, navigation }) => {
                             : user.name}
                     </Text>
                     <View style={styles.githubText}>
-                        <MaterialCommunityIcons
-                            name="github-circle"
-                            size={20}
-                            color="white"
+                        <Avatar.Icon
+                            size={16}
+                            style={{ backgroundColor: Colors.primaryBg }}
+                            color={Colors.primaryBg}
+                            icon={() => (
+                                <AntDesign
+                                    name="github"
+                                    size={16}
+                                    color="#fcfcfc"
+                                />
+                            )}
                         />
                         <Text
                             style={styles.githubUsername}

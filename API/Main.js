@@ -80,7 +80,8 @@ export const generateDataStructure = async () => {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Authorization: 'Bearer ' + GIT_TOKEN,
+                Authorization:
+                    'Bearer ' + 'b959cbd5bfdbe011faf65ccf3ecf81787452f9a9',
             },
         }
     )
@@ -136,7 +137,8 @@ async function getData() {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Authorization: 'Bearer ' + GIT_TOKEN,
+                Authorization:
+                    'Bearer ' + 'b959cbd5bfdbe011faf65ccf3ecf81787452f9a9',
             },
         }
     )
@@ -191,7 +193,8 @@ async function getData() {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    Authorization: 'Bearer ' + GIT_TOKEN,
+                    Authorization:
+                        'Bearer ' + 'b959cbd5bfdbe011faf65ccf3ecf81787452f9a9',
                 },
             }
         )

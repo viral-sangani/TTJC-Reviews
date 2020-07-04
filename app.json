@@ -19,12 +19,14 @@
         "updates": {
             "fallbackToCacheTimeout": 0
         },
-        "assetBundlePatterns": ["**/*"],
+
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "ttjc"
         },
         "web": {
             "favicon": "./assets/images/favicon.png"
-        }
+        },
+        "entryPoint": "node_modules/expo/AppEntry.js"
     }
 }

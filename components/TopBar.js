@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Avatar, Searchbar } from 'react-native-paper'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { AntDesign } from '@expo/vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Colors from '../constants/Colors'
 
 const TopBar = ({ title, secondary, navigation, handleReloadData }) => {
@@ -55,7 +55,7 @@ const TopBar = ({ title, secondary, navigation, handleReloadData }) => {
                                 size={32}
                                 source={require('../assets/images/logo.png')}
                             />
-                            <Text style={styles.appName}>TTJC Reviews</Text>
+                            <Text style={styles.appName}>TTJC Reviews!</Text>
                         </>
                     )}
                 </View>
