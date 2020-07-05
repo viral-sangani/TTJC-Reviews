@@ -55,7 +55,7 @@ const TopBar = ({ title, secondary, navigation, handleReloadData }) => {
                                 size={32}
                                 source={require('../assets/images/logo.png')}
                             />
-                            <Text style={styles.appName}>TTJC Reviews!</Text>
+                            <Text style={styles.appName}>TTJC Reviews</Text>
                         </>
                     )}
                 </View>
